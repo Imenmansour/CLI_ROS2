@@ -1,0 +1,55 @@
+Natural Language Command,ROS CLI Command
+List all active topics,ros2 topic list
+Print messages published to a topic,ros2 topic echo <topic_name>
+Show information about a topic,ros2 topic info <topic_name>
+List all available services,ros2 service list
+Call a service with the specified arguments,ros2 service call <service_name> <service_type> <arguments>
+Show information about a service,ros2 service info <service_name>
+List all active nodes,ros2 node list
+Show information about a node,ros2 node info <node_name>
+Launch a specified launch file,ros2 launch <package_name> <launch_file>
+List all parameters of a node,ros2 param list <node_name>
+Get the value of a parameter,ros2 param get <node_name> <param_name>
+Set the value of a parameter,ros2 param set <node_name> <param_name> <value>
+Record messages from specified topics into a bag file,ros2 bag record <topics>
+Play back messages from a bag file,ros2 bag play <bag_file>
+Run a specified executable from a package,ros2 run <package_name> <executable_name>
+Diagnose issues with the ROS 2 installation,ros2 doctor
+Show ROS 2 version,ros2 --version
+Show help for a specific command,ros2 <command> --help
+Show list of all commands,ros2 --help
+Get information about a specific package,ros2 pkg info <package_name>
+List all packages,ros2 pkg list
+Find the path of a specific package,ros2 pkg prefix <package_name>
+List all nodes in a specific namespace,ros2 node list --namespace <namespace>
+Get information about a node in a specific namespace,ros2 node info <node_name> --namespace <namespace>
+List all parameters for a node in a specific namespace,ros2 param list <node_name> --namespace <namespace>
+Get a specific parameter value for a node in a specific namespace,ros2 param get <node_name> <param_name> --namespace <namespace>
+Set a specific parameter value for a node in a specific namespace,ros2 param set <node_name> <param_name> <value> --namespace <namespace>
+Show the types of messages published on a topic,ros2 topic type <topic_name>
+Show the type of a specific service,ros2 service type <service_name>
+Show the type of a specific node,ros2 node type <node_name>
+Show the parameters of a specific node in JSON format,ros2 param list <node_name> --format json
+Show the node lifecycle state,ros2 lifecycle state <node_name>
+Get the list of nodes that have a specific lifecycle state,ros2 lifecycle list <state>
+List all currently active actions,ros2 action list
+Get information about a specific action,ros2 action info <action_name>
+Send a goal to an action server,ros2 action send_goal <action_name> <goal>
+Show information about a specific action result,ros2 action result <action_name> <goal_id>
+Show information about a specific action feedback,ros2 action feedback <action_name> <goal_id>
+Show information about a specific action status,ros2 action status <action_name> <goal_id>
+Show all topics being published by a specific node,ros2 node topics <node_name>
+Show all services offered by a specific node,ros2 node services <node_name>
+Show all actions provided by a specific node,ros2 node actions <node_name>
+Check if a specific node is running,ros2 node check <node_name>
+Show all available actions,ros2 action list
+Get the status of a specific action,ros2 action status <action_name> <goal_id>
+Print the messages published to a topic with a specific rate,ros2 topic echo <topic_name> --rate <rate>
+Record messages to a bag file with specific topics and time,ros2 bag record <topics> --duration <time>
+Show information about the current ROS 2 network,ros2 network info
+Check the health of ROS 2 nodes,ros2 node check
+Print the message type of a topic,ros2 topic type <topic_name>
+Print the message definition of a topic,ros2 topic pub <topic_name> --msg <message_definition>
+List all parameters available in the ROS 2 parameter server,ros2 param list
+Get the value of a parameter from the parameter server,ros2 param get <node_name> <param_name>
+Set the value of a parameter in the parameter server,ros2 param set <node_name> <param_name> <value>

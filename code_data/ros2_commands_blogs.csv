@@ -1,0 +1,101 @@
+Natural Language Command,ROS CLI Command
+Create a ROS 2 package with both Python and C++ nodes,"ros2 pkg create my_cpp_py_pkg --build-type ament_cmake,
+        mkdir my_cpp_py_pkg\ntouch my_cpp_py_pkg/__init__.py\nmkdir scripts\ntouch my_cpp_py_pkg/module_to_import.py\ntouch scripts/py_node.py"
+Add a C++ node and header file to the package,touch src/cpp_node.cpp\ntouch include/my_cpp_py_pkg/cpp_header.hpp
+Add a Python node and module to the package,"touch scripts/py_node.py\n#!/usr/bin/env python3\n...,
+        from my_cpp_py_pkg.module_to_import import ..."
+Configure the package.xml file for both C++ and Python,<buildtool_depend>ament_cmake</buildtool_depend>\n<buildtool_depend>ament_cmake_python</buildtool_depend>\n<depend>rclcpp</depend>\n<depend>rclpy</depend>
+Configure the CMakeLists.txt file for both C++ and Python,"find_package(ament_cmake required)\nfind_package(ament_cmake_python required)\nfind_package(rclcpp required)\nfind_package(rclpy required),
+        add_executable(cpp_executable src/cpp_node.cpp)\nament_target_dependencies(cpp_executable rclcpp),
+        ament_python_install_package(${PROJECT_NAME"
+Compile the ROS 2 package with both Python and C++ nodes,colcon build --packages-select my_cpp_py_pkg
+Run the C++ and Python nodes from the package,"ros2 run my_cpp_py_pkg cpp_executable,
+        ros2 run my_cpp_py_pkg py_node.py"
+How to integrate OpenCV with a ROS 2 C++ node,Create a ROS 2 package with the necessary dependencies: ros2 pkg create my_opencv_demo --dependencies rclcpp std_msgs sensor_msgs cv_bridge image_transport opencv
+How to integrate OpenCV with a ROS 2 C++ node,Create a ROS 2 package with the necessary dependencies: ros2 pkg create my_opencv_demo --dependencies rclcpp std_msgs sensor_msgs cv_bridge image_transport opencv
+how to use the gazebo differential drive plugin in ros 2,"ros2 topic list: List the available ROS 2 topics,
+        ros2 topic echo /odom: Subscribe to and display the contents of the /odom topic,
+        ros2 run teleop_twist_keyboard teleop_twist_keyboard: Run the teleop_twist_keyboard node to control the robot's movement"
+sign in utilizing python for efficient ros2 interface inspection and interaction,"python find_node.py <keyword|topic|service|action>: This Python script identifies nodes associated with a particular topic, service, or action in ROS 2. It accepts a keyword as input and examines all active nodes to find any connections to the keyword."
+"Create a new package using either CMake or Python, and run its executable",ROS 2 CLI command: ros2 pkg create buildtype amentcmake nodename mynode mypackage
+Build the package,ROS 2 CLI command: colcon build
+Source the setup file,ROS 2 CLI command: source install/local_setup.bash
+Run the executable created in the package,ROS 2 CLI command: ros2 run mypackage mynode
+Customize the package.xml file,"ROS 2 code snippet: {
+            package_name: mypackage,
+            version: 0.0.0,
+            description: beginner client libraries tutorials practice package description,
+            maintainer: {
+                name: user,
+                email: user@todo.todo"
+Customize the setup.py file,"ROS 2 code snippet: {
+            package_name: mypypkg,
+            version: 0.0.0,
+            maintainer: todo,
+            maintainer_email: todo,
+            description: todo: package description,
+            license: todo: license declaration"
+Create a ROS 2 C++ node,"#include \rclcpp/rclcpp.hpp\\nint main(int argc, char **argv) {\n  rclcpp::init(argc, argv);\n  auto node = std::make_shared<rclcpp::node>(\my_node_name\);\n  rclcpp::spin(node);\n  rclcpp::shutdown();\n  return 0;\n"
+Create a ROS 2 C++ node using object-oriented programming,#include \rclcpp/rclcpp.hpp\\nclass mynode : public rclcpp::node {\npublic:\n  mynode() : node(\my_node_name\) {
+Add a timer to a ROS 2 C++ node,"#include \rclcpp/rclcpp.hpp\\nclass mynode : public rclcpp::node {\npublic:\n  mynode() : node(\my_node_name\) {\n    timer_ = this->create_wall_timer(std::chrono::milliseconds(200), std::bind(&mynode::timercallback, this));\n"
+Create a ROS 2 package with both Python and C++ nodes,"ros2 pkg create my_cpp_py_pkg --build-type ament_cmake,
+        mkdir my_cpp_py_pkg\ntouch my_cpp_py_pkg/__init__.py\nmkdir scripts\ntouch my_cpp_py_pkg/module_to_import.py\ntouch scripts/py_node.py"
+Add a C++ node and header file to the package,touch src/cpp_node.cpp\ntouch include/my_cpp_py_pkg/cpp_header.hpp
+Add a Python node and module to the package,"touch scripts/py_node.py\n#!/usr/bin/env python3\n...,
+        from my_cpp_py_pkg.module_to_import import ..."
+Configure the package.xml file for both C++ and Python,<buildtool_depend>ament_cmake</buildtool_depend>\n<buildtool_depend>ament_cmake_python</buildtool_depend>\n<depend>rclcpp</depend>\n<depend>rclpy</depend>
+Configure the CMakeLists.txt file for both C++ and Python,"find_package(ament_cmake required)\nfind_package(ament_cmake_python required)\nfind_package(rclcpp required)\nfind_package(rclpy required),
+        add_executable(cpp_executable src/cpp_node.cpp)\nament_target_dependencies(cpp_executable rclcpp),
+        ament_python_install_package(${PROJECT_NAME"
+Compile the ROS 2 package with both Python and C++ nodes,colcon build --packages-select my_cpp_py_pkg
+Run the C++ and Python nodes from the package,"ros2 run my_cpp_py_pkg cpp_executable,
+        ros2 run my_cpp_py_pkg py_node.py"
+Configure the snapcraft.yaml file,"name: ros2-talker-listener\nversion: \0.1\\nsummary: ros2 talker/listener example\ndescription: |\n  this example launches a ros2 talker and listener.\ngrade: devel\nconfinement: strict\nbase: core18\n\nparts:\n  ros-demos:\n    plugin: colcon\n    source: https://github.com/ros2/demos.git\n    source-branch: crystal\n    colcon-rosdistro: crystal\n    colcon-source-space: demo_nodes_cpp\n    build-packages:\n      [make, gcc, g++]\n    stage-packages:\n      [ros-crystal-ros2launch]\n\napps:\n  run:\n    command: opt/ros/crystal/bin/ros2 launch demo_nodes_cpp talker_listener.launch.py\n    plugs:\n      [network, network-bind]"
+"whenever you start to have multiple nodes (with parameters, arguments, ) in your application, creating a launch file becomes an almost mandatory step to be able to scale and go beyond 2-3 nodes without creating a huge mess.",ROS 2 CLI command or minimal code: <launch>\n  <node pkg=\demo_nodes_cpp\ exec=\talker\/>\n  <node pkg=\demo_nodes_py\ exec=\listener\/>\n</launch>
+write a minimal ros2 xml launch file,ROS 2 CLI command or minimal code: <launch>\n  <node pkg=\demo_nodes_cpp\ exec=\talker\/>\n  <node pkg=\demo_nodes_py\ exec=\listener\/>\n</launch>
+install the ros2 xml launch file,ROS 2 CLI command or minimal code: install(directory launch destination share/{project_name
+start the launch file,ROS 2 CLI command or minimal code: ros2 launch my_robot_bringup demo.launch.xml
+node renaming,ROS 2 CLI command or minimal code: <launch>\n  <node pkg=\demo_nodes_cpp\ exec=\talker\ name=\my_talker\/>\n  <node pkg=\demo_nodes_py\ exec=\listener\ name=\my_listener\/>\n</launch>
+topic/service remapping,ROS 2 CLI command or minimal code: <launch>\n  <node pkg=\demo_nodes_cpp\ exec=\talker\ name=\my_talker\>\n    <remap from=\/chatter\ to=\/my_chatter\/>\n  </node>\n  <node pkg=\demo_nodes_py\ exec=\listener\ name=\my_listener\>\n    <remap from=\/chatter\ to=\/my_chatter\/>\n  </node>\n</launch>
+parameters,ROS 2 CLI command or minimal code: <launch>\n  <node pkg=\turtlesim\ exec=\turtlesim_node\>\n    <param name=\background_r\ value=\200\/>\n    <param name=\background_g\ value=\200\/>\n    <param name=\background_b\ value=\200\/>\n  </node>\n</launch>
+request a mobile robot to move to a specific position,"client node: client = node.create_client(moverobot, 'move_robot')\nrequest = moverobot.request()\nrequest.target_position = desired_position\nresponse = client.call(request),
+        server node: def handle_move_robot(request, response):\n    # logic to move the robot to the desired position\n    response.success = True\n    return response\nserver = node.create_service(moverobot, 'move_robot', handle_move_robot)"
+request sensor status from a remote node,"client node: client = node.create_client(getsensorstatus, 'get_sensor_status')\nrequest = getsensorstatus.request()\nrequest.sensor_id = sensor_id\nresponse = client.call(request),
+        server node: def handle_get_sensor_status(request, response):\n    # logic to check the status of the sensor\n    response.status = get_sensor_status(request.sensor_id)\n    return response\nserver = node.create_service(getsensorstatus, 'get_sensor_status', handle_get_sensor_status)"
+Open the snapcraft.yaml file and update it with the following contents,"name: ros2-talker-listener,
+        version: '0.1',
+        summary: ros2 talker/listener example,
+        description: this example launches a ros2 talker and listener.,
+        grade: devel,
+        confinement: strict,
+        base: core20,
+        parts: {
+            ros-demos: {
+                plugin: colcon,
+                source: https://github.com/ros2/demos.git,
+                source-branch: foxy,
+                source-subdir: demo_nodes_cpp,
+                build-packages: [
+                    make,
+                    gcc,
+                    g++
+                ],
+                stage-packages: [
+                    ros-foxy-ros2launch
+                ]"
+apps,"ros2-talker-listener: {
+                command: opt/ros/foxy/bin/ros2 launch demo_nodes_cpp talker_listener.launch.py,
+                plugs: [
+                    network,
+                    network-bind
+                ],
+                extensions: [
+                    ros2-foxy
+                ]"
+offline camera calibration in ros 2,"# on linux with apt: sudo apt install ros-<ros2-distro>-camera-calibration,
+    # on mac with robostack: mamba install ros-<ros2-distro>-camera-calibration,
+    ros2 run opencv_cam opencv_cam_main --ros-args -p file:=true -p filename:=/../teslacam/recentclips/2023-11-01_15-07-10-front.mp4: Load video files using opencv_cam to ingest into the /video_raw topic for offline calibration.,
+    ros2 run opencv_cam opencv_cam_main --ros-args -p file:=true -p filename:=/../teslacam/recentclips/2023-11-01_15-07-10-front.mp4 -p camera_info_path: Replay the recorded video and specify the camera_info_path argument to feed data to the /camera_info topic."
+"getting started with ros2: overview of ros2 workspaces, packages and nodes part 4 of our getting started with ros2 series","ros2 workspace: A ROS 2 workspace is the top-level directory where ROS 2 packages are developed and built. It typically contains a `src` directory where the source code for packages resides.,
+        ros2 package: A ROS 2 package is the fundamental building block in ROS 2. Each package can include multiple nodes and other resources, and is designed to be reusable and modular.,
+        ros2 node: A ROS 2 node is an executable process (like a Python or C++ script) that performs computations in ROS 2. Nodes communicate with each other using topics, services, and actions."

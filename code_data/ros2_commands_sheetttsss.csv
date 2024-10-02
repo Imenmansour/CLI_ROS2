@@ -1,0 +1,45 @@
+Natural Language Command,ROS 2 CLI Command
+List all the actions in the ROS graph,ros2 action list
+Introspect about an action,ros2 action info <action_name>
+Send an action goal,ros2 action send_goal <action_name> <action_type> <values>
+Record the data published to a topic,ros2 bag record <topic_name>
+Get details about a bag file,ros2 bag info <bag_file_name>
+Replay a bag file,ros2 bag play <bag_file_name>
+Output a list of running containers and components,ros2 component list
+Output a list of components registered in the ament index,ros2 component types
+Load a component into a container node,ros2 component load /ComponentManager composition composition::Talker
+"Output the list of loaded controllers, their type, and status",ros2 control list_controllers
+Load a controller in a controller manager,ros2 control load_controller
+Adjust the state of a controller,ros2 control set_controller_state
+Start the daemon if it isn't running,ros2 daemon start
+Output the status of the daemon,ros2 daemon status
+Stop the daemon if it is running,ros2 daemon stop
+Check all aspects of ROS 2 and print all warnings,ros2 doctor --report
+List extension points,ros2 extension_points
+List extensions of a package,ros2 extensions
+List all interface types available,ros2 interface list
+Output a list of available interface types within one package,ros2 interface package <package_name>
+Output the interface definition,ros2 interface show <interface_type>
+Execute a launch file,ros2 launch <package_name> <launch_file_name>
+Output a list of available transitions for a node,ros2 lifecycle list <node_name>
+Get lifecycle state for one or more nodes,ros2 lifecycle get
+Receive a single UDP multicast packet,ros2 multicast receive
+Send a single UDP multicast packet,ros2 multicast send
+Run a node,ros2 run <package_name> <executable_name>
+Get information about a node,ros2 node info <node_name>
+See the parameters belonging to nodes,ros2 param list
+Display the type and current value of a parameter,ros2 param get <node_name> <parameter_name>
+Change a parameter's value at runtime,ros2 param set <node_name> <parameter_name> <value>
+View a node's current parameter values,ros2 param dump <node_name>
+Load parameters from a file to a currently running node,ros2 param load <node_name> <parameter_file>
+Create an enclave,ros2 security create_enclave <keystore> <enclave_name>
+Create a keystore,ros2 security create_keystore <keystore_name>
+Create a permission,ros2 security create_permission
+Generate keys and permission files from a list of identities and policy files,ros2 security generate_artifacts
+Generate an XML policy file from ROS graph data,ros2 security generate_policy
+List enclaves in a keystore,ros2 security list_enclaves
+Return a list of all the services currently active in the system,ros2 service list
+Find out the type of a service,ros2 service type <service_name>
+Find all the services of a specific type,ros2 service find <type_name>
+Call a service,ros2 service call <service_name> <service_type> <arguments>
+Return a list of all the topics,ros2 topic list

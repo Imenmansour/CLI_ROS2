@@ -1,0 +1,189 @@
+Natural Language Command,ROS CLI Command
+Migrating interfaces,"Messages, services, and actions are collectively called interfaces in ROS 2.: [
+      rosidl_default_generators,
+      rosidl_default_runtime,
+      rosidl_interface_packages
+    ],
+    Message files must end in .msg and must be located in the subfolder msg.: [
+      add_message_files(FILES message_file.msg DIRECTORY msg)
+    ],
+    Service files must end in .srv and must be located in the subfolder srv.: [
+      add_service_files(FILES service_file.srv DIRECTORY srv)
+    ],
+    Actions files must end in .action and must be located in the subfolder action.: [
+      add_action_files(FILES action_file.action DIRECTORY action)
+    ],
+    Some primitive types have been removed and the types duration and time which were builtin types in ROS 1 have been replaced with normal message definitions and must be used from the builtin_interfaces package.: [
+      from builtin_interfaces.msg import Duration, Time
+    ],
+    Naming conventions are stricter than in ROS 1.: []"
+Building interfaces,"Interfaces can only be built from packages containing a CMakeLists.txt.: [
+      cmake_minimum_required(VERSION 3.5),
+      project(my_package),
+      find_package(rosidl_default_generators REQUIRED)
+    ],
+    If you are developing a pure Python package, then the interfaces should be placed in a different package containing only the interfaces (which is best practice anyway).: []"
+Migrating interface package to ROS 2,"In your package.xml:: [
+      <buildtool_depend>rosidl_default_generators</buildtool_depend>,
+      <exec_depend>rosidl_default_runtime</exec_depend>,
+      <member_of_group>rosidl_interface_packages</member_of_group>,
+      <depend>message_package</depend>
+    ],
+    In your CMakeLists.txt:: [
+      set(CMAKE_CXX_STANDARD 17),
+      find_package(rosidl_default_generators REQUIRED),
+      find_package(message_package REQUIRED),
+      rosidl_generate_interfaces(${PROJECT_NAME"
+how to migrate from ROS 1 to ROS 2,"Migrating packages: No specific ROS 2 CLI command or code snippet. The guide provides general information on how to migrate ROS 1 packages to ROS 2.,
+    Migrating interfaces: No specific ROS 2 CLI command or code snippet. The guide provides general information on how to migrate ROS 1 interfaces to ROS 2.,
+    Migrating C++ packages: No specific ROS 2 CLI command or code snippet. The guide provides general information on how to migrate C++ ROS 1 packages to ROS 2.,
+    Migrating Python packages: No specific ROS 2 CLI command or code snippet. The guide provides general information on how to migrate Python ROS 1 packages to ROS 2.,
+    Migrating launch files: No specific ROS 2 CLI command or code snippet. The guide provides general information on how to migrate ROS 1 launch files to ROS 2.,
+    Migrating parameters: No specific ROS 2 CLI command or code snippet. The guide provides general information on how to migrate ROS 1 parameters to ROS 2.,
+    Migrating scripts: No specific ROS 2 CLI command or code snippet. The guide provides general information on how to migrate ROS 1 scripts to ROS 2."
+Automatic tools for migrating from ROS 1 to ROS 2,"ros2-launch-file-migrator: https://github.com/aws-robotics/ros2-launch-file-migrator,
+    ros2-migration-tools: https://github.com/awslabs/ros2-migration-tools/tree/master/porting_tools,
+    rospy2: No specific ROS 2 CLI command or code snippet. The guide mentions a Python project to automatically convert rospy calls to rclpy calls."
+Create a launch.json configuration in vscode to debug a node,"version: 0.2.0,
+        configurations: [
+            {
+                name: python: file,
+                type: python,
+                request: launch,
+                program: my_node.py"
+Install the webots_ros2 package and run simulation examples on Windows,"Install WSL2: sudo apt-get install wsl2,
+    Install ROS 2 in WSL: sudo apt-get install ros-jazzy-webots-ros2,
+    Install webots_ros2 from distributed package: sudo apt-get install ros-jazzy-webots-ros2,
+    Install webots_ros2 from sources: [
+      mkdir -p ~/ros2_ws/src,
+      source /opt/ros/jazzy/setup.bash,
+      cd ~/ros2_ws,
+      git clone --recurse-submodules https://github.com/cyberbotics/webots_ros2.git src/webots_ros2,
+      sudo apt install python3-pip python3-rosdep python3-colcon-common-extensions,
+      sudo rosdep init && rosdep update,
+      rosdep install --from-paths src --ignore-src --rosdistro jazzy,
+      colcon build,
+      source install/local_setup.bash
+    ],
+    Launch the webots_ros2_universal_robot example: [
+      source /opt/ros/jazzy/setup.bash,
+      export webots_home=/mnt/c/program\\ files/webots,
+      source install/local_setup.bash,
+      ros2 launch webots_ros2_universal_robot multirobot_launch.py
+    ],
+    Troubleshoot RVIZ: [
+      sudo apt install ros-jazzy-slam-toolbox,
+      ros2 launch webots_ros2_tiago robot_launch.py rviz:=true slam:=true,
+      ros2 run teleop_twist_keyboard teleop_twist_keyboard
+    ]"
+"Learn how to add collision and inertial properties to links, and how to add joint dynamics to joints.",ROS 2 CLI command or minimal code: <link name=\base_link\>\n  <visual>\n    <geometry>\n      <cylinder length=\0.6\ radius=\0.2\ />\n    </geometry>\n    <material name=\blue\>\n      <color rgba=\0 0 .8 1\ />\n    </material>\n  </visual>\n  <collision>\n    <geometry>\n      <cylinder length=\0.6\ radius=\0.2\ />\n    </geometry>\n  </collision>\n  <inertial>\n    <mass value=\10\ />\n    <inertia ixx=\1e-3\ ixy=\0.0\ ixz=\0.0\ iyy=\1e-3\ iyz=\0.0\ izz=\1e-3\ />\n  </inertial>\n</link>\n\n<joint name=\joint_name\>\n  <dynamics friction=\0.1\ damping=\0.01\ />\n</joint>
+Extract pairs of natural language commands and their corresponding ROS 2 CLI commands or minimal code snippets directly related to executing that command.,ros2 run <package_name> <node_name>: This ROS 2 CLI command runs a node from the specified package.
+Generate IDL files from ROS .msg files,ros2 run genidl <msg_file>: This ROS 2 CLI command generates an IDL file from the specified ROS .msg file.
+Generate C++ code from IDL files,ros2 run genidlcpp <idl_file>: This ROS 2 CLI command generates C++ code from the specified IDL file.
+Create a minimal ROS 2 client library in C++,"// Minimal ROS 2 C++ client library\n#include <rclcpp/rclcpp.hpp>\n\nint main(int argc, char ** argv) {\n  rclcpp::init(argc, argv);\n  auto node = std::make_shared<rclcpp::Node>(\minimal_node\);\n  rclcpp::spin(node);\n  rclcpp::shutdown();\n  return 0;\n"
+Create a ROS 2 publisher and subscriber,"// ROS 2 publisher\n#include <rclcpp/rclcpp.hpp>\n#include <std_msgs/msg/string.hpp>\n\nint main(int argc, char ** argv) {\n  rclcpp::init(argc, argv);\n  auto node = std::make_shared<rclcpp::Node>(\publisher_node\);\n  auto publisher = node->create_publisher<std_msgs::msg::String>(\topic\, 10);\n  rclcpp::Rate rate(10);\n  while (rclcpp::ok()) {\n    auto message = std::make_unique<std_msgs::msg::String>();\n    message->data = \Hello, world\;\n    publisher->publish(std::move(message));\n    rate.sleep();\n"
+Write the service node code in 'add_two_ints_server.cpp',"#include \rclcpp/rclcpp.hpp\: ,
+    #include \example_interfaces/srv/add_two_ints.hpp\: ,
+    void add(const std::shared_ptr<example_interfaces::srv::AddTwoInts::Request> request, std::shared_ptr<example_interfaces::srv::AddTwoInts::Response> response): {
+      response->sum = request->a + request->b;: ,
+      rclcpp_info(rclcpp::get_logger(\rclcpp\), \incoming request\\n a: %ld\ \ b: %ld\, request->a, request->b);: ,
+      rclcpp_info(rclcpp::get_logger(\rclcpp\), \sending back response: [%ld]\, (long int)response->sum);:"
+"int main(int argc, char **argv)","rclcpp::init(argc, argv);: ,
+      std::shared_ptr<rclcpp::Node> node = rclcpp::Node::make_shared(\add_two_ints_server\);: ,
+      rclcpp::Service<example_interfaces::srv::AddTwoInts>::SharedPtr service = node->create_service<example_interfaces::srv::AddTwoInts>(\add_two_ints\, &add);: ,
+      rclcpp_info(rclcpp::get_logger(\rclcpp\), \ready to add two ints.\);: ,
+      rclcpp::spin(node);: ,
+      rclcpp::shutdown();:"
+Write the client node code in 'add_two_ints_client.cpp',"#include \rclcpp/rclcpp.hpp\: ,
+    #include \example_interfaces/srv/add_two_ints.hpp\: ,
+    #include <chrono>: ,
+    #include <cstdlib>: ,
+    #include <memory>: ,
+    int main(int argc, char **argv): {
+      rclcpp::init(argc, argv);: ,
+      if (argc != 3) {: {
+        rclcpp_info(rclcpp::get_logger(\rclcpp\), \usage: add_two_ints_client x y\);: ,
+        return 1;:"
+auto request = std::make_shared<example_interfaces::srv::AddTwoInts::Request>();,"request->a = atoll(argv[1]);: ,
+        request->b = atoll(argv[2]);:"
+while (!client->wait_for_service(1s)) {,"if (!rclcpp::ok()) {: {
+          rclcpp_error(rclcpp::get_logger(\rclcpp\), \interrupted while waiting for the service. exiting.\);: ,
+          return 0;:"
+Write the C++ code to read from a bag file,"#include <chrono>\n#include <functional>\n#include <iostream>\n#include <memory>\n#include <string>\n#include \rclcpp/rclcpp.hpp\\n#include \rclcpp/serialization.hpp\\n#include \rosbag2_transport/reader_writer_factory.hpp\\n#include \turtlesim/msg/pose.hpp\,
+    class playbacknode : public rclcpp::node {\npublic:\n  playbacknode(const std::string& bag_filename) : node(\playback_node\) {\n    publisher_ = this->create_publisher<turtlesim::msg::pose>(\/turtle1/pose\, 10);\n    timer_ = this->create_wall_timer(100ms, [this]() { return this->timer_callback();"
+Edit the ROS 2 project contributing code style and language versions on GitHub,"C++ Standard: We will target C++17.,
+        C++ Style: We will use the Google C++ Style Guide, with some modifications:\n- Line length: Our maximum line length is 100 characters.\n- File extensions: Header files should use the .hpp extension. Implementation files should use the .cpp extension.\n- Variable naming: For global variables, use lowercase with underscores prefixed with g_.\n- Function and method naming: Google style guide says camelCase, but the C++ std library's style of snake_case is also allowed.\n- Access control: Drop requirement for all class members to be private and therefore require accessors.\n- Exceptions: Exceptions are allowed.\n- Function-like objects: No restrictions on lambdas or std::function or std::bind.\n- Boost: Boost should be avoided unless absolutely required.\n- Comments and doc comments: Use /// and /** */ comments for documentation purposes and // style comments for notes and general comments.\n- Pointer syntax alignment: Use char * c; instead of char* c; or char *c;.\n- Class keywords: Do not put 1 space before public:, private:, or protected:.\n- Nested templates: Never add whitespace to nested templates.\n- Always use braces: Always use braces following if, else, do, while, and for, even when the body is a single line.\n- Open versus cuddled braces: Use open braces for function, class, enum, and struct definitions, but cuddle braces on if, else, while, for, etc.,
+        C Style: We will use Python's PEP7 for our C style guide, with some modifications and additions:\n- We will target C99, as we do not need to support C89 (as PEP7 recommends).\n- C++ style // comments are allowed (optional).\n- Always place literals on the left-hand side of comparison operators, e.g. 0 == ret instead of ret == 0.\n- Do not use py_ as a prefix for everything, instead use a camelcase version of the package name or other appropriate prefix.,
+        Python Version: We will target Python 3 for our development.,
+        Python Style: We will use the PEP8 guidelines for code format, with the following additional rule: We allow up to 100 characters per line.,
+        CMake Version: We will target CMake 3.8.,
+        CMake Style: Since there is not an existing CMake style guide, we will define our own:\n- Use lowercase command names (find_package, not find_package).\n- Use snake_case identifiers (variables, functions, macros).\n- Use empty else() and end...() commands.\n- No whitespace before ( 's.\n- Use two spaces of indention, do not use tabs.\n- Do not use aligned indentation for parameters of multi-line macro invocations.\n- Prefer functions with set(parent_scope) to macros.\n- When using macros, prefix local variables with _ or a reasonable prefix.,
+        Markdown/ReStructuredText/Docblocks Style: The following rules to format text is intended to increase readability as well as versioning:\n- Each section title should be preceded by one empty line and succeeded by one empty line.\n- In ReStructuredText, the headings should follow the hierarchy described in the Sphinx style guide.\n- In Markdown, the headings should follow the atx-style described in the Markdown syntax documentation.\n- Each sentence must start on a new line.\n- Each sentence can optionally be wrapped to keep each line short.\n- The lines should not have any trailing white spaces.\n- A code block must be preceded and succeeded by an empty line."
+Write the fixed frame broadcaster,code: #include <chrono>\n#include <functional>\n#include <memory>\n#include \geometry_msgs/msg/transform_stamped.hpp\\n#include \rclcpp/rclcpp.hpp\\n#include \tf2_ros/transform_broadcaster.h\\n\nusing namespace std::chrono_literals;\n\nclass fixedframebroadcaster : public rclcpp::node {\npublic:\n    fixedframebroadcaster() : node(\fixed_frame_tf2_broadcaster\) {\n        tf_broadcaster_ = std::make_shared<tf2_ros::transformbroadcaster>(this);\n\n        auto broadcast_timer_callback = [this](){\n            geometry_msgs::msg::transformstamped t;\n            t.header.stamp = this->get_clock()->now();\n            t.header.frame_id = \turtle1\;\n            t.child_frame_id = \carrot1\;\n            t.transform.translation.x = 0.0;\n            t.transform.translation.y = 2.0;\n            t.transform.translation.z = 0.0;\n            t.transform.rotation.x = 0.0;\n            t.transform.rotation.y = 0.0;\n            t.transform.rotation.z = 0.0;\n            t.transform.rotation.w = 1.0;\n            tf_broadcaster_->sendtransform(t);\n
+Write the dynamic frame broadcaster,code: #include <chrono>\n#include <functional>\n#include <memory>\n#include \geometry_msgs/msg/transform_stamped.hpp\\n#include \rclcpp/rclcpp.hpp\\n#include \tf2_ros/transform_broadcaster.h\\n\nusing namespace std::chrono_literals;\n\nconst double pi = 3.141592653589793238463;\n\nclass dynamicframebroadcaster : public rclcpp::node {\npublic:\n    dynamicframebroadcaster() : node(\dynamic_frame_tf2_broadcaster\) {\n        tf_broadcaster_ = std::make_shared<tf2_ros::transformbroadcaster>(this);\n\n        auto broadcast_timer_callback = [this](){\n            rclcpp::time now = this->get_clock()->now();\n            double x = now.seconds() * pi;\n            geometry_msgs::msg::transformstamped t;\n            t.header.stamp = now;\n            t.header.frame_id = \turtle1\;\n            t.child_frame_id = \carrot1\;\n            t.transform.translation.x = 10 * sin(x);\n            t.transform.translation.y = 10 * cos(x);\n            t.transform.translation.z = 0.0;\n            t.transform.rotation.x = 0.0;\n            t.transform.rotation.y = 0.0;\n            t.transform.rotation.z = 0.0;\n            t.transform.rotation.w = 1.0;\n            tf_broadcaster_->sendtransform(t);\n
+how to create a ROS 2 metapackage variant,"ros2 pkg create --build-type ament_cmake my_project_variant,
+    <?xml version=\1.0\?>\n<?xml-model href=\http://download.ros.org/schema/package_format2.xsd\ schematypens=\http://www.w3.org/2001/xmlschema\?>\n<package format=\2\>\n  <name>my_project_variant</name>\n  <version>1.0.0</version>\n  <description>a package to aggregate all packages in my_project.</description>\n  <maintainer>maintainer name</maintainer>\n  <license>apache-2.0</license>\n  <!-- packages in my_project -->\n  <exec_depend>my_project_msgs</exec_depend>\n  <exec_depend>my_project_services</exec_depend>\n  <exec_depend>my_project_examples</exec_depend>\n  <export>\n    <build_type>ament_cmake</build_type>\n  </export>\n</package>,
+    cmake_minimum_required(version 3.5)\nproject(my_project_variant none)\nfind_package(ament_cmake required)\nament_package()"
+how to create a custom ROS 2 variant using platform-specific tools,"# On Debian or Ubuntu, use the equivs utilities\n# The Debian Administrator's Handbook has a section on meta-packages"
+Launch composable nodes using ROS 2 launch,"Python:
+      import launch
+from launch_ros.actions import composablenodecontainer
+from launch_ros.descriptions import composablenode
+
+def generate_launch_description():
+    container = composablenodecontainer(
+        name='image_container',
+        namespace='',
+        package='rclcpp_components',
+        executable='component_container',
+        composable_node_descriptions=[
+            composablenode(
+                package='image_tools',
+                plugin='image_tools::cam2image',
+                name='cam2image',
+                remappings=[('/image', '/burgerimage')],
+                parameters=[{
+                    'width': 320,
+                    'height': 240,
+                    'burger_mode': True,
+                    'history': 'keep_last'"
+how to use callback groups when running a node in a multi-threaded executor,"c++: my_callback_group = create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);\nrclcpp::Options options;\noptions.callback_group = my_callback_group;\nmy_sub = create_subscription<int32_t>(\/topic\, rclcpp::SensorDataQoS(), callback, options);,
+        python: my_callback_group = MutuallyExclusiveCallbackGroup()\nmy_sub = self.create_subscription(int32, \/topic\, self.callback, qos_profile=1, callback_group=my_callback_group)"
+how to avoid deadlocks when using callback groups,"c++: client_cb_group_ = this->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);\ntimer_cb_group_ = this->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);,
+        python: client_cb_group = MutuallyExclusiveCallbackGroup()\ntimer_cb_group = MutuallyExclusiveCallbackGroup()"
+Write a C++ node to record data to a bag,"#include statements: [
+            #include <rclcpp/rclcpp.hpp>,
+            #include <std_msgs/msg/string.hpp>,
+            #include <rosbag2_cpp/writer.hpp>
+        ],
+        Create a writer object: writer_ = std::make_unique<rosbag2_cpp::writer>();,
+        Open a bag: writer_->open(\my_bag\);,
+        Create a callback to write data to the bag: auto _callback_lambda = [this](std::shared_ptr<rclcpp::serializedmessage> msg){ rclcpp::time time_stamp = this->now(); writer_->write(msg, \chatter\, \std_msgs/msg/string\, time_stamp);"
+Write a C++ node to generate and record synthetic data to a bag,"#include statements: [
+            #include <chrono>,
+            #include <example_interfaces/msg/int32.hpp>,
+            #include <rclcpp/rclcpp.hpp>,
+            #include <rosbag2_cpp/writer.hpp>
+        ],
+        Create a writer object and open a bag: [
+            writer_ = std::make_unique<rosbag2_cpp::writer>();,
+            writer_->open(\timed_synthetic_bag\);
+        ],
+        Register a topic with the bag: writer_->create_topic({ 0u, \synthetic\, \example_interfaces/msg/int32\, rmw_get_serialization_format(), {"
+Write a C++ executable to generate and record synthetic data to a bag,"#include statements: [
+            #include <chrono>,
+            #include <rclcpp/rclcpp.hpp>,
+            #include <example_interfaces/msg/int32.hpp>,
+            #include <rosbag2_cpp/writer.hpp>,
+            #include <rosbag2_cpp/writers/sequential_writer.hpp>,
+            #include <rosbag2_storage/serialized_bag_message.hpp>
+        ],
+        Create a writer object and open a bag: [
+            std::unique_ptr<rosbag2_cpp::writer> writer_ = std::make_unique<rosbag2_cpp::writer>();,
+            writer_->open(\big_synthetic_bag\);
+        ],
+        Register a topic with the bag: writer_->create_topic({ 0u, \synthetic\, \example_interfaces/msg/int32\, rmw_get_serialization_format(), {"
+Setting up a reset handler,"respawn = true: In the launch file of your package, add the respawn parameter to the driver node to ensure it is automatically respawned when the simulation is reset.,
+    reset_handler = launch.actions.RegisterEventHandler(event_handler=launch.event_handlers.OnProcessExit(target_action=robot_driver, on_exit=get_ros2_control_spawners,)): If you have other nodes that need to be restarted along with the driver node (e.g., ros2_control nodes), use the OnProcessExit event handler to declare a list of nodes that must be restarted at simulation reset.,
+    Manually restart nodes after pushing the reset button: If your nodes require shutdown before restart (e.g., nav2 or rviz), there is no way to make the reset work in the launch file. Instead, start Webots in a specific launch file without other nodes, and manually restart the second launch file containing all other nodes after pressing the reset button."
+Write the code to publish static transforms to tf2.,#include <memory>\n#include \geometry_msgs/msg/transform_stamped.hpp\\n#include \rclcpp/rclcpp.hpp\\n#include \tf2/linearmath/quaternion.h\\n#include \tf2_ros/static_transform_broadcaster.h\\n\nclass staticframepublisher : public rclcpp::node {\npublic:\n    explicit staticframepublisher(char * transformation[]):\n        node(\static_turtle_tf2_broadcaster\) {\n        tf_static_broadcaster_ = std::make_shared<tf2_ros::statictransformbroadcaster>(this);\n        this->make_transforms(transformation);\n

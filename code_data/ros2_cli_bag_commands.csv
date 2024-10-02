@@ -1,0 +1,19 @@
+Command Description,ROS 2 Command
+List all the actions in the ROS graph,ros2 action list
+Get information about the action /turtle1/rotate_absolute,ros2 action info /turtle1/rotate_absolute
+Send a goal to the action /turtle1/rotate_absolute with theta 1.57,"ros2 action send_goal /turtle1/rotate_absolute turtlesim/action/RotateAbsolute ""{theta: 1.57}"""
+Show the interface of the action turtlesim/action/RotateAbsolute,ros2 interface show turtlesim/action/RotateAbsolute
+Record data published to the topic /turtle1/cmd_vel,ros2 bag record /turtle1/cmd_vel
+"Record data published to the topics /turtle1/cmd_vel and /turtle1/pose, and save the file as my_bag",ros2 bag record -o my_bag /turtle1/cmd_vel /turtle1/pose
+Get details about the bag file <bag_name.db3>,ros2 bag info <bag_name.db3>
+Replay the bag file <bag_name.db3>,ros2 bag play <bag_name.db3>
+Record all topics,ros2 bag record -a
+Record only topics matching a regular expression,ros2 bag record -e <regex>
+Exclude topics matching a regular expression,ros2 bag record -x <regex>
+Set the destination of the bag file to create,ros2 bag record -o <file_name>
+Replay topics with a specific frequency using the /clock,ros2 bag play <bag_name.db3> --clock <frequency>
+Enable loop playback when replaying a bag file,ros2 bag play <bag_name.db3> -l
+Set the rate to play back messages from the bag file,ros2 bag play <bag_name.db3> -r <rate>
+"Use a different storage identifier, defaults to sqlite3",ros2 bag play <bag_name.db3> -s <storage_identifier>
+Replay specific topics from the bag file,ros2 bag play <bag_name.db3> --topics <topic_1> <topic_2>
+Use a YAML file to define storage configurations,ros2 bag play <bag_name.db3> --storage-config-file <file_path>

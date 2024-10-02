@@ -1,0 +1,1 @@
+how-to guides cross-compilation edit on github cross-compilation ï the cross_compile tool is not supported anymore. an alternative to cross-compilation is to build multi-platform docker images using docker buildx . other versions v: jazzy releases jazzy (latest) iron humble galactic (eol) foxy (eol) eloquent (eol) dashing (eol) crystal (eol) in development rolling

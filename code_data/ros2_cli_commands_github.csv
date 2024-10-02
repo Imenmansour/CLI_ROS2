@@ -1,0 +1,40 @@
+Natural Language Command,ROS CLI Command
+Show all topics with detailed information,ros2 topic list -v
+Print messages published to a topic with a specific format,ros2 topic echo <topic_name> --qos-profile <qos_profile>
+Show message definition of a specific topic,ros2 interface show <message_type>
+Record messages from specified topics into a bag file with compression,ros2 bag record <topics> --compression <compression_type>
+Play back messages from a bag file with a specific rate,ros2 bag play <bag_file> --rate <rate>
+Run a node with a specific argument,ros2 run <package_name> <executable_name> --ros-args -p <param_name>:<value>
+Launch a launch file with remappings and parameters,ros2 launch <package_name> <launch_file> <remappings> <parameters>
+Show the complete list of parameters available for a node,ros2 param list <node_name> --all
+Get the value of a parameter in a specific format,ros2 param get <node_name> <param_name> --format <format>
+Set a parameter with a specific type,ros2 param set <node_name> <param_name> <value> --type <type>
+Show the parameter value as a YAML format,ros2 param get <node_name> <param_name> --format yaml
+List all available actions with details,ros2 action list --detail
+Send a goal to an action server with a specific goal definition,ros2 action send_goal <action_name> <goal_definition> --feedback
+Show the status of an action with a specific goal ID,ros2 action status <action_name> <goal_id> --verbose
+Show the feedback for a specific action goal,ros2 action feedback <action_name> <goal_id>
+Show detailed information about the lifecycle state of a node,ros2 lifecycle info <node_name>
+List all lifecycle nodes in a specific state,ros2 lifecycle list <state>
+Show a specific lifecycle transition of a node,ros2 lifecycle transition <node_name> <transition>
+List all parameters for a node in a specific namespace with details,ros2 param list <node_name> --namespace <namespace> --verbose
+Get the parameter value with a specific data type,ros2 param get <node_name> <param_name> --type <data_type>
+Set a parameter value with a specific data type,ros2 param set <node_name> <param_name> <value> --type <data_type>
+Display the definition of a service type,ros2 srv show <service_type>
+Show the message types used in a specific service,ros2 srv type <service_name>
+Check for network configuration issues,ros2 network check
+List all nodes and their lifecycle states,ros2 node list --lifecycle
+Show detailed information about nodes in a specific namespace,ros2 node info <node_name> --namespace <namespace> --all
+List all available actions and their types,ros2 action list --types
+Show detailed parameter information with types and values,ros2 param list <node_name> --detail
+Get parameter values from the parameter server in JSON format,ros2 param list <node_name> --format json
+Set multiple parameters at once for a node,ros2 param set <node_name> --all <parameters>
+Record data to a bag file with a specific filter,ros2 bag record <topics> --filter <filter_expression>
+Play a bag file while simulating network delay,ros2 bag play <bag_file> --delay <delay>
+Launch a node with specific QoS settings,ros2 run <package_name> <executable_name> --ros-args -r <remappings> -p <param_name>:<value> --qos-profile <qos_profile>
+Inspect the parameters of all nodes in a namespace,ros2 param list --namespace <namespace> --all
+Display detailed information about the ROS 2 network configuration,ros2 network info --detail
+Show all available topics with QoS profiles,ros2 topic list --qos
+Send a goal to an action server and specify the goal options,ros2 action send_goal <action_name> <goal> --options <options>
+Show all lifecycle transitions available for a node,ros2 lifecycle transitions <node_name>
+Check the health of all nodes in a specific namespace,ros2 node check --namespace <namespace>

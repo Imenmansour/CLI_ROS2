@@ -1,0 +1,63 @@
+Natural Language Command,ROS 2 CLI Command
+General Format of ROS 2 CLI,"ros2 [command] [verb] <positional-argument> <optional-arguments>
+For Help on ROS 2 CLI commands:
+$ ros2 [command] --help
+$ ros2 [command] [verb] -h"
+Action - list,ros2 action list
+Action - info <action_name>,ros2 action info <action_name>
+Action - send_goal <action_name> <action_type> <values>,"ros2 action send_goal <action_name> <action_type> <values>
+Arguments:
+-f: echo feedback messages for the goal"
+Bag - record <topic_name>,ros2 bag record <topic_name>
+Bag - info <bag_file_name>,ros2 bag info <bag_file_name>
+Bag - play <bag_file_name>,"ros2 bag play <bag_file_name>
+Arguments:
+--clock: publish to /clock at a specific frequency in Hz
+-l: enable loop playback when playing a bag file
+-r: rate to play back messages
+-s: storage identifier to be used, defaults to 'sqlite3'
+--topics: topics to replay, separated by space
+--storage-config-file: path to a yaml file defining storage specific configurations
+-a: recording all topics, required if no topics are listed explicitly or through a regex
+-e: recording only topics matching provided regular expression
+-x: exclude topics matching
+-o: destination of the bag file to create"
+Component - list,ros2 component list
+Component - types,ros2 component types
+Component - load <component>,"ros2 component load <component>
+Arguments:
+-n: component node name
+--node-namespace: component node namespace
+--log-level: component node log level
+-r: component node remapping rules, in the 'from:=to' form
+-p: component node parameters, in the 'name:=value' form"
+Control - list_controller_types,ros2 control list_controller_types
+Control - list_controllers,ros2 control list_controllers
+Control - list_hardware_interfaces,ros2 control list_hardware_interfaces
+Control - load_controller <controller_name>,"ros2 control load_controller <controller_name>
+Arguments:
+-c: name of the controller manager ROS node
+--claimed-interfaces: list controller's claimed interfaces
+--required-state-interfaces: list controller's required state interfaces
+--required-command-interfaces: list controller's required command interfaces"
+Control - reload_controller_libraries,ros2 control reload_controller_libraries
+Control - set_controller_state <controller_name> <state>,ros2 control set_controller_state <controller_name> <state>
+Control - switch_controllers <start_controllers> <stop_controllers>,ros2 control switch_controllers <start_controllers> <stop_controllers>
+Control - unload_controller <controller_name>,ros2 control unload_controller <controller_name>
+Control - view_controller_chains,ros2 control view_controller_chains
+Daemon - start,ros2 daemon start
+Daemon - status,ros2 daemon status
+Daemon - stop,ros2 daemon stop
+Doctor -,"ros2 doctor
+Arguments:
+--report: print all warnings
+-rf: print reports of failed checks only
+-iw: include warnings as failed checks. Warnings are ignored by default"
+Extension Points -,"ros2 extension_points
+Arguments:
+--all, -a: show extension points which failed to be imported
+--verbose, -v: show more information for each extension point"
+Extensions -,"ros2 extensions
+Arguments:
+-a: show extensions which failed to load or are incompatible
+-v: show more information for each extension"

@@ -1,0 +1,42 @@
+Command Description,ROS 2 Command
+List running containers and components,ros2 component list
+Load a component into a container node,ros2 component load /ComponentManager composition composition::Talker
+Run a component in a standalone container,ros2 component standalone <component_name>
+List all components registered in the ament index,ros2 component types
+Unload a component from a container node,ros2 component unload <container_node> <component_name>
+List available controller types and their base classes,ros2 control list_controller_types
+List loaded controllers with their type and status,ros2 control list_controllers
+List hardware interfaces for loaded controllers,ros2 control list_hardware_interfaces
+Load a controller in the controller manager,ros2 control load_controller <controller_name>
+Reload controller libraries,ros2 control reload_controller_libraries
+Set controller state,ros2 control set_controller_state <controller_name> <state>
+Switch controllers in a controller manager,ros2 control switch_controllers --start-controllers <controller_1> --stop-controllers <controller_2>
+Unload a controller from the controller manager,ros2 control unload_controller <controller_name>
+Generate a diagram of loaded chained controllers,ros2 control view_controller_chains
+Start the ROS 2 daemon,ros2 daemon start
+Check the status of the ROS 2 daemon,ros2 daemon status
+Stop the ROS 2 daemon,ros2 daemon stop
+Check all aspects of ROS 2,ros2 doctor
+Print all warnings from ROS 2 checks,ros2 doctor --report
+Print reports of failed checks only,ros2 doctor -rf
+Include warnings as failed checks,ros2 doctor -iw
+List all extension points,ros2 extension_points
+Show failed extension points,ros2 extension_points --all
+Show more detailed information for each extension point,ros2 extension_points --verbose
+List extensions of a package,ros2 extensions
+Show extensions that failed to load or are incompatible,ros2 extensions --all
+Show detailed information about each extension,ros2 extensions --verbose
+List all interface types available,ros2 interface list
+List available interface types in the package turtlesim,ros2 interface package turtlesim
+Show the interface definition for turtlesim/msg/Pose,ros2 interface show turtlesim/msg/Pose
+List packages that provide interfaces,ros2 interface packages
+Launch a file from the package,ros2 launch [package_name] [launch_file_name]
+Run the launch file non-interactively,ros2 launch [package_name] [launch_file_name] --noninteractive
+Show output from all subprocesses in the launch file,ros2 launch [package_name] [launch_file_name] --show-all-subprocesses-output
+Print the description of the launch file,ros2 launch [package_name] [launch_file_name] --print-description
+Show arguments that can be passed to the launch file,ros2 launch [package_name] [launch_file_name] --show-args
+"Launch with a prefix command, like xterm",ros2 launch [package_name] [launch_file_name] --launch-prefix 'xterm -e gdb -ex run --args'
+List available lifecycle transitions for a node,ros2 lifecycle list <node_name>
+Get lifecycle state of one or more nodes,ros2 lifecycle get <node_name>
+List nodes with lifecycle support,ros2 lifecycle nodes
+Trigger a lifecycle state transition,ros2 lifecycle set <node_name> <transition>

@@ -1,0 +1,69 @@
+Natural Language Command,ROS 2 CLI Command
+Create a new ROS 2 package with specific dependencies and build type,ros2 pkg create <package_name> --build-type ament_cmake --dependencies rclcpp std_msgs
+Build all packages in the workspace with verbose output,colcon build --event-handlers console_direct+
+Clean the workspace and remove all build artifacts,colcon clean --all
+Run a specific test in a package and show detailed output,ros2 test <package_name> <test_name> --verbose
+Launch a file with specific parameters and remapping,ros2 launch <package_name> <launch_file> param_name:=value -r old_topic:=new_topic
+Show the launch configuration for a specific launch file,ros2 launch info <package_name> <launch_file>
+Display the current QoS settings for a specific topic,ros2 topic info <topic_name>
+Publish a message to a topic at a specific frequency with a custom QoS,ros2 topic pub /topic_name std_msgs/msg/String 'data: 'Hello'' --qos-profile <profile_name> -r 10
+Create a new action server with a specific goal type,ros2 run <package_name> <action_server_executable> --ros-args --action-type <action_type>
+Create a new action client for a specific action type,ros2 run <package_name> <action_client_executable> --ros-args --action-type <action_type>
+Call a service with a timeout and handle the response,"ros2 service call /service_name example_interfaces/srv/AddTwoInts '{a: 1, b: 2}' --timeout 5.0"
+Get the list of all available parameters for a specific node,ros2 param list <node_name>
+Set multiple parameters for a node in one command,ros2 param set <node_name> param1 value1 param2 value2
+Load parameters from a YAML file into a node,ros2 param load <node_name> <yaml_file_path>
+Show the current state of a specific lifecycle node,ros2 lifecycle get <node_name>
+Transition a lifecycle node to 'activate',ros2 lifecycle set <node_name> activate
+Transition a lifecycle node to 'deactivate',ros2 lifecycle set <node_name> deactivate
+Get the list of all available QoS profiles,ros2 qos list
+Set a specific QoS policy for a topic,ros2 topic pub /topic_name std_msgs/msg/String 'data: 'Hello'' --qos-profile <qos_policy>
+Create a new launch file with parameters,ros2 launch create <package_name> <launch_file_name> --format <format>
+View the output of a specific launch file,ros2 launch <package_name> <launch_file> --show-output
+Run a launch file with a specific log level,ros2 launch <package_name> <launch_file> --ros-args --log-level <level>
+Create a new service server,ros2 run <package_name> <service_server_executable>
+Create a new service client,ros2 run <package_name> <service_client_executable>
+Call a service with a JSON input,ros2 service call /service_name <service_type> <json_input>
+Publish a message to a topic with a custom QoS profile,ros2 topic pub /topic_name std_msgs/msg/String 'data: 'Hello'' --qos-profile <qos_profile>
+Show the status of all active actions,ros2 action list
+Get the status of a specific action goal,ros2 action status <action_name> <goal_id>
+Cancel a specific action goal,ros2 action cancel <action_name> <goal_id>
+Get the feedback of a specific action goal,ros2 action feedback <action_name> <goal_id>
+List all available action servers,ros2 action server list
+List all available action clients,ros2 action client list
+Show the details of a specific parameter,ros2 param get <node_name> <param_name>
+Set a parameter for a node using a YAML file,ros2 param load <node_name> <yaml_file_path>
+Get the list of all parameters for a specific node,ros2 param list <node_name>
+Display the details of a specific node,ros2 node info <node_name>
+Show the details of a specific topic,ros2 topic info <topic_name>
+List all available topics with their types,ros2 topic list -t
+View the current configuration of the ROS 2 system,ros2 config get
+Set a configuration parameter for the ROS 2 system,ros2 config set <key> <value>
+Create a new ROS 2 timer with a specific period,ros2 timer create --period <period> --node-name <node_name>
+List all available timers in the system,ros2 timer list
+Show the details of a specific timer,ros2 timer info <timer_name>
+Clear all timers in the system,ros2 timer clear
+View the current state of a specific timer,ros2 timer state <timer_name>
+Create a new ROS 2 node with a specific namespace,ros2 run <package_name> <node_executable> --ros-args --namespace <namespace>
+List all nodes in a specific namespace,ros2 node list --namespace <namespace>
+Show the details of a specific QoS policy,ros2 qos show <qos_policy_name>
+Create a new parameter event handler,ros2 param event create <node_name>
+List all available parameter event handlers,ros2 param event list
+Create a new action definition file,ros2 action create <package_name>/action/<action_name>
+Create a new service definition file,ros2 srv create <package_name>/srv/<service_name>
+Create a new message definition file,ros2 msg create <package_name>/msg/<message_name>
+Generate interface files for a package,ros2 interface generate <package_name>
+Build a specific target in a workspace,colcon build --packages-select <target_name>
+Clean all build artifacts in a workspace,colcon clean
+Show the build status of all packages,colcon build --status
+Run a specific test in a package,ros2 test <package_name> <test_name>
+View the results of all tests in a package,ros2 test result <package_name>
+Create a new launch file with a specific format,ros2 launch create <package_name> <launch_file_name> --format <format>
+Launch a file with remapped parameters,ros2 launch <package_name> <launch_file> param_name:=new_value
+List all available launch files in a package,ros2 launch list <package_name>
+Start a specific node with custom parameters,ros2 run <package_name> <node_name> --ros-args -p param_name:=value
+View the logs of a specific node with filtering,ros2 log list <node_name> --filter <filter_criteria>
+Set a parameter using a JSON file,ros2 param load <node_name> <json_file_path>
+Get the list of all available nodes in a specific namespace,ros2 node list --namespace <namespace>
+Show the details of a specific action client,ros2 action client info <action_name>
+Show the details of a specific action server,ros2 action server info <action_name>
